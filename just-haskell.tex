@@ -1,0 +1,255 @@
+\documentclass{beamer}
+
+\usetheme{default}
+
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{polyglossia}
+
+\setmainlanguage[variant=usmax]{english}
+\setotherlanguage{spanish}
+
+\usepackage{fancyvrb}
+
+\DefineShortVerb{\|}
+\DefineVerbatimEnvironment{code}{Verbatim}{frame=lines}
+
+\title{Haskell}
+\subtitle{An advanced purely-functional programming language}
+\author{}
+\institute{Stack Builders}
+\date{November 27, 2014}
+
+\logo{\includegraphics[height=0.5cm]{stackbuilders.png}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frame{\titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Haskell}
+
+  \begin{center}
+    \url{http://www.haskell.org}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Hello, World!}
+
+  \begin{itemize}
+  \item
+    \begin{code}
+$ cat hello-world.hs
+main :: IO ()
+main = putStrLn "Hello"
+    \end{code}
+  \item
+    \begin{code}
+$ ghc hello-world.hs
+...
+$ ./hello-world
+Hello, World!
+    \end{code}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Hello, World?}
+
+  \begin{itemize}
+  \item
+    \begin{code}
+$ cat JustHaskell.hs
+...
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+    \end{code}
+  \item
+    \begin{code}
+$ ghci JustHaskell.hs
+JustHaskell> factorial 5
+120
+    \end{code}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Quicksort}
+
+  \scriptsize
+  \begin{code}
+qsort :: Ord a => [a] -> [a]
+qsort []     = []
+qsort (x:xs) =
+  qsort (filter (<= x) xs) ++ [x] ++ qsort (filter (> x) xs)
+  \end{code}
+  \normalsize
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Features}
+
+  \begin{block}{Statically typed}
+    \begin{itemize}
+    \item
+      \begin{code}
+JustHaskell> let x = 1 :: Int
+JustHaskell> let y = 2 :: Double
+JustHaskell> x + y
+    Couldn't match expected type...
+      \end{code}
+    \item
+      \begin{code}
+JustHaskell> False && "True"
+    Couldn't match expected type...
+      \end{code}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Features}
+
+  \begin{block}{Purely functional}
+    \begin{itemize}
+    \item
+      \small
+      \begin{code}
+fibonacci :: Integer -> Integer
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+      \end{code}
+      \normalsize
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Features}
+
+  \begin{block}{Type inference}
+    \begin{itemize}
+    \item
+      \begin{code}
+data [] a = [] | a : [a]
+      \end{code}
+    \item
+      \begin{code}
+$ cat JustHaskell.hs
+...
+sum []     = 0
+sum (x:xs) = x + sum xs
+      \end{code}
+    \item
+      \begin{code}
+$ ghci JustHaskell.hs
+JustHaskell> :t sum
+sum :: Num a => [a] -> a
+      \end{code}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Haskell}
+  \framesubtitle{Features}
+
+  \begin{block}{Laziness}
+    \begin{itemize}
+    \item
+      \begin{code}
+JustHaskell> take 10 [1..]
+[1,2,3,4,5,6,7,8,9,10]
+      \end{code}
+    \item
+      \begin{code}
+JustHaskell> take 3 (repeat 7)
+[7,7,7]
+      \end{code}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Haskell}
+  \framesubtitle{Community}
+
+  \begin{itemize}
+  \item
+    ``An open source community effort for over 20 years.''
+  \item
+    ``The Haskell community is spread out online across several mediums and
+    around the world!''
+    \begin{itemize}
+    \item Mailing lists, IRC channels, StackOverflow, Google+, Reddit,
+      the Haskell wiki, Planet Haskell
+    \end{itemize}
+  \item
+    Open source contribution to Haskell is very active.
+    \begin{itemize}
+    \item
+      Over 6950 packages freely available.
+    \end{itemize}
+  \end{itemize}
+  \vfill
+  \begin{thebibliography}{Haskell}
+  \bibitem[Haskell]{haskell}
+    \url{http://www.haskell.org/}
+  \end{thebibliography}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Haskell}
+  \framesubtitle{Documentation}
+
+  \begin{thebibliography}{O'Sullivan, Goerzen, and Stewart 2008}
+  \setbeamertemplate{bibliography item}[book]
+  \bibitem[Bird 2014]{bird-2014}
+    Bird, Richard (2014).
+    \newblock \emph{Thinking Functionally with Haskell}.
+    \newblock Cambridge University Press.
+  \setbeamertemplate{bibliography item}[book]
+  \bibitem[Lipovača 2011]{lipovača-2011}
+    Lipovača, Miran (2011).
+    \newblock \emph{Learn You a Haskell for Great Good! A Beginner's Guide}.
+    \newblock No Starch Press.
+  \setbeamertemplate{bibliography item}[book]
+  \bibitem[O'Sullivan, Goerzen, and Stewart 2008]{osullivan-2008}
+    O'Sullivan, Bryan, John Goerzen, and Don Stewart (2008).
+    \newblock \emph{Real World Haskell}.
+    \newblock O'Reilly.
+  \end{thebibliography}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
