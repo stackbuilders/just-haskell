@@ -14,11 +14,10 @@
 \DefineShortVerb{\|}
 \DefineVerbatimEnvironment{code}{Verbatim}{frame=lines}
 
-\title{Haskell}
-\subtitle{An advanced purely-functional programming language}
-\author{}
+\title{Introducción a Haskell}
+\author{Juan Pedro Villa Isaza}
 \institute{Stack Builders}
-\date{November 27, 2014}
+\date{27 de noviembre de 2014}
 
 \logo{\includegraphics[height=0.5cm]{stackbuilders.png}}
 
@@ -31,32 +30,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-  \frametitle{Haskell}
+  \frametitle{Introducción a Haskell}
 
   \begin{center}
-    \url{http://www.haskell.org}
+    \url{http://www.haskell.org/}
   \end{center}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Haskell}
-  \framesubtitle{Hello, World!}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{¡Hola, mundo!}
 
   \begin{itemize}
   \item
     \begin{code}
 $ cat hello-world.hs
 main :: IO ()
-main = putStrLn "Hello"
+main = putStrLn "¡Hola, mundo!"
     \end{code}
   \item
     \begin{code}
 $ ghc hello-world.hs
 ...
 $ ./hello-world
-Hello, World!
+¡Hola, mundo!
     \end{code}
   \end{itemize}
 \end{frame}
@@ -64,8 +63,8 @@ Hello, World!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Haskell}
-  \framesubtitle{Hello, World?}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{¿Hola, mundo?}
 
   \begin{itemize}
   \item
@@ -75,18 +74,22 @@ $ cat JustHaskell.hs
 factorial :: Integer -> Integer
 factorial 0 = 1
 factorial n = n * factorial (n - 1)
+...
     \end{code}
   \item
     \begin{code}
 $ ghci JustHaskell.hs
+...
 JustHaskell> factorial 5
 120
     \end{code}
   \end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}[fragile]
-  \frametitle{Haskell}
+  \frametitle{Introducción a Haskell}
   \framesubtitle{Quicksort}
 
   \scriptsize
@@ -102,121 +105,173 @@ qsort (x:xs) =
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Haskell}
-  \framesubtitle{Features}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Programación funcional pura}
 
-  \begin{block}{Statically typed}
-    \begin{itemize}
-    \item
-      \begin{code}
-JustHaskell> let x = 1 :: Int
-JustHaskell> let y = 2 :: Double
-JustHaskell> x + y
-    Couldn't match expected type...
-      \end{code}
-    \item
-      \begin{code}
-JustHaskell> False && "True"
-    Couldn't match expected type...
-      \end{code}
-    \end{itemize}
-  \end{block}
+  \begin{itemize}
+  \item
+    \begin{code}
+x :: Int
+x = 1
+    \end{code}
+  \item
+    \begin{code}
+x = 2
+    \end{code}
+  \item
+    \begin{code}
+    Multiple declarations of ‘x’...
+    \end{code}
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Haskell}
-  \framesubtitle{Features}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Programación funcional pura}
 
-  \begin{block}{Purely functional}
-    \begin{itemize}
-    \item
-      \small
-      \begin{code}
+  \begin{itemize}
+  \item
+    \small
+    \begin{code}
 fibonacci :: Integer -> Integer
 fibonacci 0 = 0
 fibonacci 1 = 1
 fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
-      \end{code}
-      \normalsize
-    \end{itemize}
-  \end{block}
+    \end{code}
+    \normalsize
+  \item
+    \begin{code}
+JustHaskell> fibonacci 5
+5
+    \end{code}
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Haskell}
-  \framesubtitle{Features}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Tipado estático}
 
-  \begin{block}{Type inference}
-    \begin{itemize}
-    \item
-      \begin{code}
+  \begin{itemize}
+  \item
+    \begin{code}
+JustHaskell> let x = 1 :: Int
+JustHaskell> let y = 2 :: Double
+JustHaskell> x + y
+    Couldn't match expected type...
+    \end{code}
+  \item
+    \begin{code}
+JustHaskell> False && "True"
+    Couldn't match expected type...
+    \end{code}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Inferencia de tipos}
+
+  \begin{itemize}
+  \item
+    \begin{code}
 data [] a = [] | a : [a]
-      \end{code}
-    \item
-      \begin{code}
-$ cat JustHaskell.hs
-...
+    \end{code}
+  \item
+    \begin{code}
 sum []     = 0
 sum (x:xs) = x + sum xs
-      \end{code}
-    \item
-      \begin{code}
-$ ghci JustHaskell.hs
+    \end{code}
+  \item
+    \begin{code}
 JustHaskell> :t sum
 sum :: Num a => [a] -> a
-      \end{code}
-    \end{itemize}
-  \end{block}
+    \end{code}
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Haskell}
-  \framesubtitle{Features}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Evaluación perezosa}
 
-  \begin{block}{Laziness}
-    \begin{itemize}
-    \item
-      \begin{code}
+  \begin{itemize}
+  \item
+    \begin{code}
 JustHaskell> take 10 [1..]
 [1,2,3,4,5,6,7,8,9,10]
-      \end{code}
-    \item
-      \begin{code}
-JustHaskell> take 3 (repeat 7)
-[7,7,7]
-      \end{code}
-    \end{itemize}
-  \end{block}
+    \end{code}
+  \item
+    %% Taken from Real World Haskell (p. xxiv).
+    \begin{code}
+JustHaskell> let minima n xs = take n (sort xs)
+JustHaskell> minima 10 [100,99..1]
+[1,2,3,4,5,6,7,8,9,10]
+    \end{code}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Programación \emph{wholemeal}}
+
+  %% Taken from Brent Yorgey's Introduction to Haskell (Haskell
+  %% Basics).
+  \begin{itemize}
+  \item[Java:]
+    \small
+    \begin{code}
+int[] xs = {2,3,5,7,11};
+
+int total = 0;
+for (int i = 0; i < xs.length; i++) {
+  total = total + 3 * xs[i];
+}
+
+System.out.println(total);
+    \end{code}
+    \normalsize
+  \item[Haskell:]
+    \small
+    \begin{code}
+xs = [2,3,5,7,11]
+
+total = sum (map (3*) xs)
+
+main = print total
+    \end{code}
+    \normalsize
+  \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-  \frametitle{Haskell}
-  \framesubtitle{Community}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Comunidad}
 
   \begin{itemize}
   \item
-    ``An open source community effort for over 20 years.''
+    ``Un esfuerzo de más de 20 años por parte de la comunidad de
+    código abierto''.
   \item
-    ``The Haskell community is spread out online across several mediums and
-    around the world!''
-    \begin{itemize}
-    \item Mailing lists, IRC channels, StackOverflow, Google+, Reddit,
-      the Haskell wiki, Planet Haskell
-    \end{itemize}
+    Wiki.
   \item
-    Open source contribution to Haskell is very active.
-    \begin{itemize}
-    \item
-      Over 6950 packages freely available.
-    \end{itemize}
+    Canales de IRC, listas de correo.
+  \item
+    Google+, Planet Haskell, Reddit, Stack Overflow.
+  \item
+    Más de 6950 paquetes.
+  \item
+    ...
   \end{itemize}
   \vfill
   \begin{thebibliography}{Haskell}
@@ -228,8 +283,8 @@ JustHaskell> take 3 (repeat 7)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-  \frametitle{Haskell}
-  \framesubtitle{Documentation}
+  \frametitle{Introducción a Haskell}
+  \framesubtitle{Bibliografía}
 
   \begin{thebibliography}{O'Sullivan, Goerzen, and Stewart 2008}
   \setbeamertemplate{bibliography item}[book]
