@@ -6,10 +6,14 @@ factorial :: Integer -> Integer
 factorial 0 = 1
 factorial n = n * factorial (n - 1)
 
-quicksort :: Ord a => [a] -> [a]
-quicksort []     = []
-quicksort (x:xs) =
-  quicksort (filter (<= x) xs) ++ [x] ++ quicksort (filter (> x) xs)
+qsort :: Ord a => [a] -> [a]
+qsort []     = []
+qsort (x:xs) = qsort (filter (<= x) xs) ++ [x] ++ qsort (filter (> x) xs)
+
+x :: Int
+x = 1
+
+-- x = 2
 
 fibonacci :: Integer -> Integer
 fibonacci 0 = 0
